@@ -1177,9 +1177,21 @@ function toJson(obj, pretty) {
  * @returns {Object|Array|string|number} Deserialized JSON string.
  */
 function fromJson(json) {
-  return isString(json)
+  /*return isString(json)
       ? JSON.parse(json)
-      : json;
+      : json;*/
+  // this is because some services retur a bar json format
+	if(isString(json)){
+		try {
+	    	var newJson = JSON.parse(json);
+	    	return newJson;
+		}
+		catch(err) {
+		    return json;
+		}
+	}else{
+		return json;
+	}
 }
 
 
